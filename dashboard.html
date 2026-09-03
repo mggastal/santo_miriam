@@ -41,6 +41,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .brand{display:flex;align-items:center;gap:10px;min-width:0;}
 .logo-box{width:34px;height:34px;border-radius:9px;background:var(--kc,var(--accent));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#fff;flex-shrink:0;}
 .logo-img{height:34px;width:auto;max-width:136px;object-fit:contain;object-position:left center;flex-shrink:0;display:none;}
+.brand-divider{width:1px;height:28px;background:var(--border);flex-shrink:0;}
+.agency-logo-header{height:24px;width:auto;max-width:110px;object-fit:contain;object-position:left center;flex-shrink:0;display:none;opacity:.85;}
 .brand-txt{min-width:0;}
 .brand-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .brand-sub{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
@@ -207,6 +209,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <div class="brand-name" id="brandName">Candidato</div>
         <div class="brand-sub">Relatório de Tráfego</div>
       </div>
+      <div class="brand-divider" id="brandDivider" style="display:none"></div>
+      <img class="agency-logo-header" id="agencyLogoHeader" src="" alt="">
     </div>
   </div>
   <div class="bars-row">
@@ -367,6 +371,11 @@ if(AGENCY_LOGO_URL){
   agLogo.onload = () => { agLogo.style.display='inline-block'; document.getElementById('agencyNameFallback').style.display='none'; };
   agLogo.onerror = () => { agLogo.style.display='none'; }; // sem arquivo: mantém o nome em texto
   agLogo.src = AGENCY_LOGO_URL;
+
+  const agLogoHeader = document.getElementById('agencyLogoHeader');
+  agLogoHeader.onload = () => { agLogoHeader.style.display='block'; document.getElementById('brandDivider').style.display='block'; };
+  agLogoHeader.onerror = () => { agLogoHeader.style.display='none'; document.getElementById('brandDivider').style.display='none'; };
+  agLogoHeader.src = AGENCY_LOGO_URL;
 }
 document.documentElement.style.setProperty('--accent', COR_ACENTO);
 if(DATA_GERACAO){
