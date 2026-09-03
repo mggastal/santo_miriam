@@ -17,11 +17,11 @@ OUTPUT_FILE    = "index.html"
 
 NOME_CLIENTE   = "Miriam Marroni"
 LOGO_LETRA     = "MM"
-LOGO_URL       = "logo.png"  # arquivo de imagem (coloque junto do index.html); deixe "" para usar só a letra
+LOGO_URL       = "logocandidato.png"  # arquivo de imagem (coloque junto do index.html); deixe "" para usar só a letra
 COR_ACENTO     = "#C0122D"
 
 AGENCY_NOME      = ""  # preencha se quiser mostrar o nome em texto quando não houver logo
-AGENCY_LOGO_URL  = "logo.png"  # logo da agência no rodapé; deixe "" para mostrar só o nome
+AGENCY_LOGO_URL  = "logo.png"  # logo da agência/empresa (rodapé + ao lado da logo do cliente no topo); deixe "" para mostrar só o nome
 
 MOEDA          = "BRL"     # BRL | USD | EUR | ARS
 _MOEDA_MAP = {
@@ -94,6 +94,16 @@ def _sum_dupe_cols(raw, label):
 def load_meta():
     print("  Lendo meta-ads...")
     raw = pd.read_csv(URL_META)
+
+    # DIAGNÓSTICO TEMPORÁRIO — mostra o valor cru que o pandas recebeu pra
+    # essa coluna, antes de qualquer conversão. Isso revela o formato real
+    # (pode ser removido depois que o problema do funil for resolvido).
+    _debug_col = "Video 25 Percent Watched Actions"
+    if _debug_col in raw.columns:
+        print(f"  [debug] tipo bruto da coluna '{_debug_col}': {raw[_debug_col].dtype}")
+        print(f"  [debug] primeiros 5 valores brutos: {raw[_debug_col].head(5).tolist()}")
+    else:
+        print(f"  [debug] AVISO: coluna '{_debug_col}' não encontrada. Colunas disponíveis: {list(raw.columns)}")
 
     df = pd.DataFrame(index=raw.index)
     df["date"] = pd.to_datetime(raw["Date"], errors="coerce") if "Date" in raw.columns else pd.NaT
