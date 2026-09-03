@@ -167,8 +167,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .row-name.lvl3{padding-left:40px;}
 .chevron{width:12px;flex-shrink:0;font-size:9px;color:var(--muted2);transition:transform .15s;display:inline-block;}
 .chevron.open{transform:rotate(90deg);}
-.row-thumb{width:26px;height:26px;border-radius:6px;object-fit:cover;background:var(--border);flex-shrink:0;}
-.row-thumb-ph{width:26px;height:26px;border-radius:6px;background:var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.row-thumb{width:52px;height:52px;border-radius:8px;object-fit:cover;background:var(--border);flex-shrink:0;}
+.row-thumb-ph{width:52px;height:52px;border-radius:8px;background:var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;}
 .camp-name-txt{overflow:hidden;text-overflow:ellipsis;max-width:280px;}
 .camp-table tfoot td{font-weight:700;border-top:2px solid var(--border);border-bottom:none;color:var(--text);}
 .mini-funnel-btn{padding:4px 11px;border-radius:7px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:10.5px;font-weight:700;color:var(--accent);white-space:nowrap;}
@@ -205,7 +205,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <div class="brand">
       <img class="logo-img" id="logoImg" src="" alt="">
       <div class="logo-box" id="logoBox">CAND</div>
-      <div class="brand-txt">
+      <div class="brand-txt" id="brandTxt">
         <div class="brand-name" id="brandName">Candidato</div>
         <div class="brand-sub">Relatório de Tráfego</div>
       </div>
@@ -361,8 +361,8 @@ document.getElementById('logoBox').textContent = LOGO_LETRA;
 document.getElementById('logoBox').style.setProperty('--kc', COR_ACENTO);
 if(LOGO_URL){
   const logoImg = document.getElementById('logoImg');
-  logoImg.onload = () => { logoImg.style.display='block'; document.getElementById('logoBox').style.display='none'; };
-  logoImg.onerror = () => { logoImg.style.display='none'; }; // sem arquivo: mantém a letra
+  logoImg.onload = () => { logoImg.style.display='block'; document.getElementById('logoBox').style.display='none'; document.getElementById('brandTxt').style.display='none'; };
+  logoImg.onerror = () => { logoImg.style.display='none'; }; // sem arquivo: mantém a letra + nome em texto
   logoImg.src = LOGO_URL;
 }
 document.getElementById('agencyNameFallback').textContent = AGENCY_NOME;
